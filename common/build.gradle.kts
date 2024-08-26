@@ -1,5 +1,8 @@
-import net.infumia.gradle.publish
+import net.infumia.gradle.applyNms
+import net.infumia.gradle.applyPublish
 
-publish()
+applyPublish()
 
-dependencies { compileOnly(libs.creative.api) }
+applyNms()
+
+dependencies { implementation(project(":nms-common")) }

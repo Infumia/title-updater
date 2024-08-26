@@ -8,6 +8,7 @@ repositories {
 dependencies {
     implementation(libs.nexus.plugin)
     implementation(libs.spotless.plugin)
+    implementation(libs.shadow.plugin)
 }
 
 kotlin {

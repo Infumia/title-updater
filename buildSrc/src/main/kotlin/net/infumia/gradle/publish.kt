@@ -3,20 +3,27 @@ package net.infumia.gradle
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.MavenPublishPlugin
 import com.vanniktech.maven.publish.SonatypeHost
+import com.vanniktech.maven.publish.tasks.JavadocJar
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.*
 
-fun Project.publish(
-    moduleName: String? = null,
-    javaVersion: Int = 8,
-    sources: Boolean = true,
-    javadoc: Boolean = true
-) {
-    applyCommon(javaVersion, sources, javadoc)
+fun Project.applyPublish(moduleName: String? = null, javaVersion: Int = 8) {
+    applyJava(javaVersion)
     apply<MavenPublishPlugin>()
 
     val projectName = "title-updater${if (moduleName == null) "" else "-$moduleName"}"
     val signRequired = project.hasProperty("sign-required")
+
+    val sourceSets = extensions.getByType<JavaPluginExtension>().sourceSets
+    tasks.register("sourcesJar", Jar::class) {
+        dependsOn("classes")
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
+    }
+
+    tasks.withType<JavadocJar> { afterEvaluate { archiveBaseName = name } }
 
     extensions.configure<MavenPublishBaseExtension> {
         coordinates(project.group.toString(), projectName, project.version.toString())
@@ -26,26 +33,26 @@ fun Project.publish(
         }
 
         pom {
-            name.set(projectName)
-            description.set("A simpe inventory title updater for bukkit with adventure support.")
-            url.set("https://github.com/Infumia/title-updater/")
+            name = projectName
+            description = "A simpe inventory title updater for bukkit with adventure support."
+            url = "https://github.com/Infumia/title-updater/"
             licenses {
                 license {
-                    name.set("MIT License")
-                    url.set("https://mit-license.org/license.txt")
+                    name = "MIT License"
+                    url = "https://mit-license.org/license.txt"
                 }
             }
             developers {
                 developer {
-                    id.set("portlek")
-                    name.set("Hasan Demirtaş")
-                    email.set("utsukushihito@outlook.com")
+                    id = "portlek"
+                    name = "Hasan Demirtaş"
+                    email = "utsukushihito@outlook.com"
                 }
             }
             scm {
-                connection.set("scm:git:git://github.com/infumia/title-updater.git")
-                developerConnection.set("scm:git:ssh://github.com/infumia/title-updater.git")
-                url.set("https://github.com/infumia/title-updater/")
+                connection = "scm:git:git://github.com/infumia/title-updater.git"
+                developerConnection = "scm:git:ssh://github.com/infumia/title-updater.git"
+                url = "https://github.com/infumia/title-updater/"
             }
         }
     }
