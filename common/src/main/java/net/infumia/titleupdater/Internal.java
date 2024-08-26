@@ -6,9 +6,7 @@ final class Internal {
 
     static boolean supportsComponents() {
         if (Internal.supportsComponent == null) {
-            Internal.supportsComponent = Version.isPaper() &&
-            Version.gte(16) &&
-            Reflection.hasClass("net.kyori.adventure.text.Component");
+            Internal.supportsComponent = Reflection.hasClass("net.kyori.adventure.text.Component");
         }
         return Internal.supportsComponent;
     }
