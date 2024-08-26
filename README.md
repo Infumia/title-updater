@@ -13,7 +13,13 @@ dependencies {
 }
 ```
 ### Code
-```kotlin
-fun main() {
+```java
+void run(final Player player) {
+    TitleUpdater.update(player, "New Title");
+    TitleUpdater.update(player, Component.text("New title"));
+    
+    ComponentSupport.deserializer(Minimessage.miniMessage());
+ 
+    TitleUpdater.update(player, "<white>New Title");
 }
 ```

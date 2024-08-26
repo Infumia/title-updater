@@ -13,7 +13,7 @@ public final class TitleUpdater {
      * Updates the title of the specified player with the given title object.
      * <p>
      * {@code title} must be either {@link String}, kyori's Component or {@link JsonElement}.
-     *
+     * <p>
      * Checks if the server is a Paper spigot, above 1.16+ and has kyori's Component class in the classpath.
      *
      * @param player the player whose title will be updated. Cannot be null.

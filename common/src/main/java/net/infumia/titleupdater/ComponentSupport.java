@@ -18,7 +18,7 @@ public final class ComponentSupport {
     /**
      * Sets the deserializer to be used for converting strings into {@link Component}s.
      * <p>
-     * You can set it to {@code null} to disable component support, but you cannot give {@link Component} object as the title.
+     * You can set it to {@code null} to disable component support for {@link String}s.
      *
      * @param deserializer the component serializer to set.
      */
@@ -32,16 +32,11 @@ public final class ComponentSupport {
         if (!(title instanceof String) && !(title instanceof Component)) {
             throw new IllegalStateException("Object must be either String or Component!");
         }
-        if (ComponentSupport.deserializer == null) {
-            if (title instanceof Component) {
-                throw new IllegalArgumentException(
-                    "Deserializer set null but title provided as Component!"
-                );
-            }
-            return title;
-        }
         final Component component;
         if (title instanceof String) {
+            if (ComponentSupport.deserializer == null) {
+                return title;
+            }
             component = ComponentSupport.deserializer.deserialize((String) title);
         } else {
             component = (Component) title;
