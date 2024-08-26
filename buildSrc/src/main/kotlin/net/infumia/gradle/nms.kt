@@ -35,7 +35,6 @@ fun Project.applyNms() {
             dependsOn(":nms-common:jar")
 
             nmsModuleToJar().forEach { (projectName, jarFile) ->
-                println(projectName)
                 dependsOn(projectName)
                 from(zipTree(jarFile))
             }
