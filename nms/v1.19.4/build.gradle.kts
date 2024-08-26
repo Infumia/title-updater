@@ -1,5 +1,20 @@
-import net.infumia.gradle.applyJava
+plugins { alias(libs.plugins.paperweight) }
 
-applyJava()
+dependencies {
+    compileOnly(project(":nms-common"))
 
-dependencies { compileOnly(project(":nms-common")) }
+    paperweight { paperDevBundle(libs.versions.minecraft.one.nineteen.four) }
+}
+
+tasks {
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+            vendor = JvmVendorSpec.ADOPTIUM
+        }
+    }
+
+    reobfJar { outputJar = layout.buildDirectory.file("libs/${project.name}.jar") }
+
+    assemble { dependsOn(reobfJar) }
+}

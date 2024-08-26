@@ -5,4 +5,11 @@ applyPublish()
 
 applyNms()
 
-dependencies { implementation(project(":nms-common")) }
+dependencies {
+    compileOnly(libs.minecraft.one.eight.eight) { isTransitive = false }
+    compileOnly(libs.adventure.api)
+    compileOnly(libs.adventure.legacy)
+    compileOnly(libs.adventure.gson)
+
+    implementation(project(":nms-common"))
+}
