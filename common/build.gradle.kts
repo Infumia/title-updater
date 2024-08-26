@@ -11,5 +11,5 @@ dependencies {
     compileOnly(libs.adventure.legacy)
     compileOnly(libs.adventure.gson)
 
-    implementation(project(":nms-common"))
+    compileOnly(project(":nms-common"))
 }
