@@ -8,20 +8,20 @@ import org.gradle.kotlin.dsl.*
 
 private val supportedVersions =
     listOf(
-        "1.8.8",
-        "1.9.4",
-        "1.10.2",
-        "1.11.2",
-        "1.12.2",
-        "1.13.2",
-        "1.14.4",
-        "1.15.2",
-        "1.16.5",
-        "1.17.1",
-        "1.18.2",
-        "1.19.4",
-        "1.20.6",
-        "1.21",
+        "v1.8.8",
+        "v1.9.4",
+        "v1.10.2",
+        "v1.11.2",
+        "v1.12.2",
+        "v1.13.2",
+        "v1.14.4",
+        "v1.15.2",
+        "v1.16.5",
+        "v1.17.1",
+        "v1.18.2",
+        "v1.19.4",
+        "v1.20.6",
+        "v1.21",
     )
 
 fun Project.applyNms() {
@@ -34,6 +34,7 @@ fun Project.applyNms() {
             dependsOn("jar")
             dependsOn(":nms-common:jar")
 
+            from(zipTree(findJarFile("common")))
             nmsModuleToJar().forEach { (projectName, jarFile) ->
                 dependsOn(projectName)
                 from(zipTree(jarFile))
@@ -47,14 +48,14 @@ fun Project.applyNms() {
 }
 
 private fun Project.nmsModuleToJar(): Map<String, String> =
-    supportedVersions.associate { ":nms-v$it:build" to findJarFile(it) }
+    supportedVersions.associate { ":nms-$it:build" to findJarFile(it) }
 
 private fun Project.nmsFolder() = rootProject.layout.projectDirectory.asFile.toPath().resolve("nms")
 
 private fun Project.findJarFile(moduleName: String): String =
     nmsFolder()
-        .resolve("v$moduleName")
+        .resolve("$moduleName")
         .resolve("build")
         .resolve("libs")
-        .resolve("nms-v$moduleName-$version.jar")
+        .resolve("nms-$moduleName-$version.jar")
         .absolutePathString()
