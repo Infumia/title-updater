@@ -14,7 +14,7 @@ minecraft-one-seventeen-one = "1.17.1-R0.1-SNAPSHOT"
 minecraft-one-eighteen-two = "1.18.2-R0.1-SNAPSHOT"
 minecraft-one-nineteen-four = "1.19.4-R0.1-SNAPSHOT"
 minecraft-one-twenty-six = "1.20.6-R0.1-SNAPSHOT"
-minecraft-one-twentyone = "1.21-R0.1-SNAPSHOT"
+minecraft-one-twentyone-one = "1.21.1-R0.1-SNAPSHOT"
 
 [libraries]
 nexus-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.29.0" }
@@ -43,26 +43,6 @@ minecraft-one-fourteen-four-nms = { module = "org.spigotmc:spigot", version.ref 
 minecraft-one-fifteen-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-fifteen-two" }
 
 minecraft-one-sixteen-five-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-sixteen-five" }
-
-minecraft-one-seventeen-one = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-seventeen-one" }
-minecraft-one-seventeen-one-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-seventeen-one" }
-minecraft-one-seventeen-one-paper = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-one-seventeen-one" }
-
-minecraft-one-eighteen-two = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-eighteen-two" }
-minecraft-one-eighteen-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-eighteen-two" }
-minecraft-one-eighteen-two-paper = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-one-eighteen-two" }
-
-minecraft-one-nineteen-four = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-nineteen-four" }
-minecraft-one-nineteen-four-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-nineteen-four" }
-minecraft-one-nineteen-four-paper = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-one-nineteen-four" }
-
-minecraft-one-twenty-six = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-twenty-six" }
-minecraft-one-twenty-six-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-twenty-six" }
-minecraft-one-twenty-six-paper = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-one-twenty-six" }
-
-minecraft-one-twentyone = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-twentyone" }
-minecraft-one-twentyone-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-twentyone" }
-minecraft-one-twentyone-paper = { module = "io.papermc.paper:paper-api", version.ref = "minecraft-one-twentyone" }
 
 [plugins]
 paperweight = { id = "io.papermc.paperweight.userdev", version = "1.7.1" }
