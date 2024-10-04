@@ -3,7 +3,7 @@ plugins { alias(libs.plugins.paperweight) }
 dependencies {
     compileOnly(project(":nms-common"))
 
-    paperweight { paperDevBundle(libs.versions.minecraft.one.twentyone) }
+    paperweight { paperDevBundle(libs.versions.minecraft.one.twentyone.one) }
 }
 
 tasks {

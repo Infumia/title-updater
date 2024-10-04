@@ -12,13 +12,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
-public final class NmsV1_21 implements Nms {
+public final class NmsV1_21_1 implements Nms {
 
     private static final HolderLookup.Provider EMPTY_REGISTRY_ACCESS = HolderLookup.Provider.create(
         Stream.empty()
     );
 
-    public static final Nms INSTANCE = new NmsV1_21();
+    public static final Nms INSTANCE = new NmsV1_21_1();
 
     @Override
     public void updateTitle(final Player player, final Object title) {
@@ -55,7 +55,7 @@ public final class NmsV1_21 implements Nms {
         } else {
             component = Component.Serializer.fromJson(
                 (JsonElement) text,
-                NmsV1_21.EMPTY_REGISTRY_ACCESS
+                NmsV1_21_1.EMPTY_REGISTRY_ACCESS
             );
         }
         return component;
