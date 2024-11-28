@@ -19,7 +19,8 @@ registerNmsModules(
     "v1.18.2",
     "v1.19.4",
     "v1.20.6",
-    "v1.21.1"
+    "v1.21.1",
+    "v1.21.3",
 )
 
 private fun registerNmsModules(vararg modules: String) {

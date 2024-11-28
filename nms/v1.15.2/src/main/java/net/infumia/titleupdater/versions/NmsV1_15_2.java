@@ -19,7 +19,6 @@ public final class NmsV1_15_2 implements Nms {
 
     @Override
     public void updateTitle(final Player player, final Object title) {
-        final IChatBaseComponent newTitle = this.toComponent(title);
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Container activeContainer = entityPlayer.activeContainer;
         final InventoryView view = activeContainer.getBukkitView();
@@ -36,7 +35,7 @@ public final class NmsV1_15_2 implements Nms {
         final PacketPlayOutOpenWindow packet = new PacketPlayOutOpenWindow(
             windowId,
             activeContainer.getType(),
-            newTitle
+            this.toComponent(title)
         );
         entityPlayer.playerConnection.sendPacket(packet);
         player.updateInventory();

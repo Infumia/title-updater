@@ -1,48 +1,56 @@
 package net.infumia.titleupdater;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 final class NmsProvider {
 
+    private static final int MAXIMUM_PATCH = 9;
+    private static final String CLASS_PATTERN = "NmsV%s_%s%s";
+    private static final String PACKAGE_NAME = "net.infumia.titleupdater.versions.";
+
     private static Nms nms;
-
-    static void init() {
-        final String classPattern = "NmsV%s_%s%s";
-        final String packageName = "net.infumia.titleupdater.versions.";
-
-        final int major = Version.major();
-        final int minor = Version.minor();
-        final int patch = Version.patch();
-
-        Nms nms = null;
-        for (int i = patch; i >= 0; --i) {
-            final String patchVersion = i == 0 ? "" : "_" + i;
-            final String className = String.format(classPattern, major, minor, patchVersion);
-
-            try {
-                final Class<?> cls = Class.forName(packageName + className);
-                final Field field = cls.getDeclaredField("INSTANCE");
-                nms = (Nms) field.get(null);
-                break;
-            } catch (final ClassNotFoundException ignored) {
-                // ignored
-            } catch (final ReflectiveOperationException exception) {
-                throw new RuntimeException("Please contact us to report this error!", exception);
-            }
-        }
-
-        NmsProvider.nms = Objects.requireNonNull(
-            nms,
-            "Unsupported server version: v" + major + "." + minor + "." + patch
-        );
-    }
 
     static Nms nms() {
         if (NmsProvider.nms == null) {
             NmsProvider.init();
         }
         return NmsProvider.nms;
+    }
+
+    private static void init() {
+        final int major = Version.major();
+        final int minor = Version.minor();
+        final int patch = Version.patch();
+
+        for (int m = minor; m >= 0; m--) {
+            for (int i = patch; i >= 0; i--) {
+                final Nms found = NmsProvider.find(major, m, patch);
+                if (found != null) {
+                    NmsProvider.nms = found;
+                    return;
+                }
+            }
+        }
+
+        throw new IllegalStateException(
+            "Unsupported server version: v" + major + "." + minor + "." + patch
+        );
+    }
+
+    private static Nms find(final int major, final int minor, final int patch) {
+        final String patchVersion = patch == 0 ? "" : "_" + patch;
+        final String className = String.format(CLASS_PATTERN, major, minor, patchVersion);
+
+        try {
+            final Class<?> cls = Class.forName(PACKAGE_NAME + className);
+            final Field field = cls.getDeclaredField("INSTANCE");
+            return (Nms) field.get(null);
+        } catch (final ClassNotFoundException ignored) {
+            // ignored
+        } catch (final ReflectiveOperationException exception) {
+            throw new RuntimeException("Please contact us to report this error!", exception);
+        }
+        return null;
     }
 
     private NmsProvider() {

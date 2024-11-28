@@ -16,7 +16,6 @@ public final class NmsV1_19_4 implements Nms {
 
     @Override
     public void updateTitle(final Player player, final Object title) {
-        final Component newTitle = this.toComponent(title);
         final var serverPlayer = ((CraftPlayer) player).getHandle();
         final var containerMenu = serverPlayer.containerMenu;
         final InventoryView view = containerMenu.getBukkitView();
@@ -33,7 +32,7 @@ public final class NmsV1_19_4 implements Nms {
         final ClientboundOpenScreenPacket packet = new ClientboundOpenScreenPacket(
             containerId,
             containerMenu.getType(),
-            newTitle
+            this.toComponent(title)
         );
         serverPlayer.connection.send(packet);
         player.updateInventory();
