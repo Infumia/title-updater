@@ -59,20 +59,6 @@ final class Version {
         return Version.patch;
     }
 
-    static boolean isPaper() {
-        Version.validate();
-        return Version.paper;
-    }
-
-    static boolean gte(final int minor) {
-        return Version.gte(minor, 0);
-    }
-
-    static boolean gte(final int minor, final int patch) {
-        Version.validate();
-        return (Version.minor > minor || (Version.minor >= minor && Version.patch >= patch));
-    }
-
     private static void validate() {
         if (
             Version.paper == null ||

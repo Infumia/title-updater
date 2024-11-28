@@ -1,19 +1,24 @@
 package net.infumia.titleupdater.versions;
 
 import com.google.gson.JsonElement;
+import java.util.stream.Stream;
 import net.infumia.titleupdater.Nms;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
-public final class NmsV1_18_2 implements Nms {
+public final class NmsV1_21_3 implements Nms {
 
-    public static final Nms INSTANCE = new NmsV1_18_2();
+    private static final HolderLookup.Provider EMPTY_REGISTRY_ACCESS = HolderLookup.Provider.create(
+        Stream.empty()
+    );
+
+    public static final Nms INSTANCE = new NmsV1_21_3();
 
     @Override
     public void updateTitle(final Player player, final Object title) {
@@ -45,9 +50,12 @@ public final class NmsV1_18_2 implements Nms {
         }
         final Component component;
         if (text instanceof String) {
-            component = new TextComponent((String) text);
+            component = Component.literal((String) text);
         } else {
-            component = Component.Serializer.fromJson((JsonElement) text);
+            component = Component.Serializer.fromJson(
+                (JsonElement) text,
+                NmsV1_21_3.EMPTY_REGISTRY_ACCESS
+            );
         }
         return component;
     }
