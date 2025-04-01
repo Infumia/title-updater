@@ -42,12 +42,7 @@ fun Project.applySpotless() {
             endWithNewline()
             trimTrailingWhitespace()
             prettier(prettierConfig)
-                .config(
-                    mapOf(
-                        "parser" to "toml",
-                        "plugins" to listOf("prettier-plugin-toml"),
-                    ),
-                )
+                .config(mapOf("parser" to "toml", "plugins" to listOf("prettier-plugin-toml")))
         }
 
         kotlin {
@@ -68,9 +63,7 @@ fun Project.applySpotless() {
         }
 
         java {
-            target(
-                *subProjects.map { "$it/src/main/java/**/*.java" }.toTypedArray(),
-            )
+            target(*subProjects.map { "$it/src/main/java/**/*.java" }.toTypedArray())
             importOrder()
             removeUnusedImports()
             endWithNewline()
@@ -83,7 +76,7 @@ fun Project.applySpotless() {
                         "useTabs" to false,
                         "printWidth" to 100,
                         "plugins" to listOf("prettier-plugin-java"),
-                    ),
+                    )
                 )
         }
     }
