@@ -23,6 +23,7 @@ private val supportedVersions =
         "v1.20.6",
         "v1.21.1",
         "v1.21.3",
+        "v1.21.4",
     )
 
 fun Project.applyNms() {
