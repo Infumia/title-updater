@@ -47,4 +47,4 @@ minecraft-one-fifteen-two-nms = { module = "org.spigotmc:spigot", version.ref = 
 minecraft-one-sixteen-five-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-sixteen-five" }
 
 [plugins]
-paperweight = { id = "io.papermc.paperweight.userdev", version = "1.7.7" }
+paperweight = { id = "io.papermc.paperweight.userdev", version = "2.0.0-beta.8" }
