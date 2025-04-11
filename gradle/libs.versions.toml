@@ -16,6 +16,7 @@ minecraft-one-nineteen-four = "1.19.4-R0.1-SNAPSHOT"
 minecraft-one-twenty-six = "1.20.6-R0.1-SNAPSHOT"
 minecraft-one-twentyone-one = "1.21.1-R0.1-SNAPSHOT"
 minecraft-one-twentyone-three = "1.21.3-R0.1-SNAPSHOT"
+minecraft-one-twentyone-four = "1.21.4-R0.1-SNAPSHOT"
 
 [libraries]
 nexus-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.31.0" }
@@ -46,4 +47,4 @@ minecraft-one-fifteen-two-nms = { module = "org.spigotmc:spigot", version.ref = 
 minecraft-one-sixteen-five-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-sixteen-five" }
 
 [plugins]
-paperweight = { id = "io.papermc.paperweight.userdev", version = "1.7.7" }
+paperweight = { id = "io.papermc.paperweight.userdev", version = "2.0.0-beta.16" }
