@@ -3,13 +3,13 @@ plugins { alias(libs.plugins.paperweight) }
 dependencies {
     compileOnly(project(":nms-common"))
 
-    paperweight { paperDevBundle(libs.versions.minecraft.one.nineteen.four) }
+    paperweight { paperDevBundle(libs.versions.minecraft.one.twentyone.four) }
 }
 
 tasks {
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(21)
             vendor = JvmVendorSpec.ADOPTIUM
         }
     }
