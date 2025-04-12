@@ -3,6 +3,7 @@ package net.infumia.gradle
 import com.github.jengelman.gradle.plugins.shadow.ShadowPlugin
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import kotlin.io.path.absolutePathString
+import kotlin.io.path.notExists
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 
@@ -54,10 +55,14 @@ private fun Project.nmsModuleToJar(): Map<String, String> =
 
 private fun Project.nmsFolder() = rootProject.layout.projectDirectory.asFile.toPath().resolve("nms")
 
-private fun Project.findJarFile(moduleName: String): String =
-    nmsFolder()
+private fun Project.findJarFile(moduleName: String): String {
+    val libsPath = nmsFolder()
         .resolve("$moduleName")
         .resolve("build")
         .resolve("libs")
-        .resolve("nms-$moduleName-$version.jar")
-        .absolutePathString()
+    var path = libsPath.resolve("nms-$moduleName-$version-reobj.jar")
+    if (path.notExists()) {
+        path = libsPath.resolve("nms-$moduleName-$version.jar")
+    }
+    return path.absolutePathString()
+}
