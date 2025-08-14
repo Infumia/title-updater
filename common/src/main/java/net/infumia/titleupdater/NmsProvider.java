@@ -24,7 +24,7 @@ final class NmsProvider {
 
         for (int m = minor; m >= 0; m--) {
             for (int i = patch; i >= 0; i--) {
-                final Nms found = NmsProvider.find(major, m, patch);
+                final Nms found = NmsProvider.find(major, m, i);
                 if (found != null) {
                     NmsProvider.nms = found;
                     return;
