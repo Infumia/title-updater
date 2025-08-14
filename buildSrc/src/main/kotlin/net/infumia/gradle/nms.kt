@@ -7,26 +7,6 @@ import kotlin.io.path.notExists
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 
-private val supportedVersions =
-    listOf(
-        "v1.8.8",
-        "v1.9.4",
-        "v1.10.2",
-        "v1.11.2",
-        "v1.12.2",
-        "v1.13.2",
-        "v1.14.4",
-        "v1.15.2",
-        "v1.16.5",
-        "v1.17.1",
-        "v1.18.2",
-        "v1.19.4",
-        "v1.20.6",
-        "v1.21.1",
-        "v1.21.3",
-        "v1.21.4",
-    )
-
 fun Project.applyNms() {
     apply<ShadowPlugin>()
 
@@ -37,7 +17,7 @@ fun Project.applyNms() {
             dependsOn("jar")
             dependsOn(":nms-common:jar")
 
-            from(zipTree(findJarFile("common")))
+            from(zipTree(findNmsJarFile("common")))
             nmsModuleToJar().forEach { (projectName, jarFile) ->
                 dependsOn(projectName)
                 from(zipTree(jarFile))
@@ -51,15 +31,16 @@ fun Project.applyNms() {
 }
 
 private fun Project.nmsModuleToJar(): Map<String, String> =
-    supportedVersions.associate { ":nms-$it:build" to findJarFile(it) }
+    rootProject.subprojects
+        .map { it.name }
+        .filter { it.startsWith("nms-") }
+        .minus("nms-common")
+        .associate { ":$it:build" to findNmsJarFile(it.removePrefix("nms-")) }
 
 private fun Project.nmsFolder() = rootProject.layout.projectDirectory.asFile.toPath().resolve("nms")
 
-private fun Project.findJarFile(moduleName: String): String {
-    val libsPath = nmsFolder()
-        .resolve("$moduleName")
-        .resolve("build")
-        .resolve("libs")
+private fun Project.findNmsJarFile(moduleName: String): String {
+    val libsPath = nmsFolder().resolve(moduleName).resolve("build").resolve("libs")
     var path = libsPath.resolve("nms-$moduleName-$version-reobj.jar")
     if (path.notExists()) {
         path = libsPath.resolve("nms-$moduleName-$version.jar")

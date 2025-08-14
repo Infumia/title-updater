@@ -1,8 +1,11 @@
 package net.infumia.titleupdater.versions;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.mojang.serialization.JsonOps;
 import net.infumia.titleupdater.Nms;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
 import net.minecraft.world.inventory.MenuType;
 import org.bukkit.craftbukkit.CraftRegistry;
@@ -10,9 +13,9 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.inventory.CraftContainer;
 import org.bukkit.entity.Player;
 
-public final class NmsV1_20_6 implements Nms {
+public final class NmsV1_21_6 implements Nms {
 
-    public static final Nms INSTANCE = new NmsV1_20_6();
+    public static final Nms INSTANCE = new NmsV1_21_6();
 
     @Override
     public void updateTitle(final Player player, final Object title) {
@@ -35,10 +38,10 @@ public final class NmsV1_20_6 implements Nms {
         if (text instanceof String) {
             component = Component.literal((String) text);
         } else {
-            component = Component.Serializer.fromJson(
-                (JsonElement) text,
-                CraftRegistry.getMinecraftRegistry()
-            );
+            component = ComponentSerialization.CODEC.parse(
+                CraftRegistry.getMinecraftRegistry().createSerializationContext(JsonOps.INSTANCE),
+                (JsonElement) text
+            ).getOrThrow(JsonParseException::new);
         }
         return component;
     }
