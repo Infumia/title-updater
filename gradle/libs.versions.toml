@@ -10,13 +10,13 @@ minecraft-one-thirteen-two = "1.13.2-R0.1-SNAPSHOT"
 minecraft-one-fourteen-four = "1.14.4-R0.1-SNAPSHOT"
 minecraft-one-fifteen-two = "1.15.2-R0.1-SNAPSHOT"
 minecraft-one-sixteen-five = "1.16.5-R0.1-SNAPSHOT"
+
+# paperweight
 minecraft-one-seventeen-one = "1.17.1-R0.1-SNAPSHOT"
 minecraft-one-eighteen-two = "1.18.2-R0.1-SNAPSHOT"
 minecraft-one-nineteen-four = "1.19.4-R0.1-SNAPSHOT"
 minecraft-one-twenty-six = "1.20.6-R0.1-SNAPSHOT"
-minecraft-one-twentyone-one = "1.21.1-R0.1-SNAPSHOT"
-minecraft-one-twentyone-three = "1.21.3-R0.1-SNAPSHOT"
-minecraft-one-twentyone-four = "1.21.4-R0.1-SNAPSHOT"
+minecraft-one-twenty-one-six = "1.21.6-R0.1-SNAPSHOT"
 
 [libraries]
 nexus-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.34.0" }
@@ -29,21 +29,13 @@ adventure-gson = { module = "net.kyori:adventure-text-serializer-gson", version.
 
 minecraft-one-eight-eight = { module = "org.spigotmc:spigot-api", version.ref = "minecraft-one-eight-eight" }
 minecraft-one-eight-eight-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-eight-eight" }
-
 minecraft-one-nine-four-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-nine-four" }
-
 minecraft-one-ten-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-ten-two" }
-
 minecraft-one-eleven-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-eleven-two" }
-
 minecraft-one-twelve-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-twelve-two" }
-
 minecraft-one-thirteen-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-thirteen-two" }
-
 minecraft-one-fourteen-four-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-fourteen-four" }
-
 minecraft-one-fifteen-two-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-fifteen-two" }
-
 minecraft-one-sixteen-five-nms = { module = "org.spigotmc:spigot", version.ref = "minecraft-one-sixteen-five" }
 
 [plugins]
