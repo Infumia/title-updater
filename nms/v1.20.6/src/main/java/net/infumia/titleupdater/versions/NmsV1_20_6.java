@@ -1,12 +1,9 @@
 package net.infumia.titleupdater.versions;
 
 import com.google.gson.JsonElement;
-import java.util.stream.Stream;
 import net.infumia.titleupdater.Nms;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.inventory.MenuType;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
