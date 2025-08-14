@@ -6,16 +6,14 @@ import net.infumia.titleupdater.Nms;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.inventory.MenuType;
+import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.inventory.CraftContainer;
 import org.bukkit.entity.Player;
 
 public final class NmsV1_20_6 implements Nms {
-
-    private static final HolderLookup.Provider EMPTY_REGISTRY_ACCESS = HolderLookup.Provider.create(
-        Stream.empty()
-    );
 
     public static final Nms INSTANCE = new NmsV1_20_6();
 
@@ -42,7 +40,7 @@ public final class NmsV1_20_6 implements Nms {
         } else {
             component = Component.Serializer.fromJson(
                 (JsonElement) text,
-                NmsV1_20_6.EMPTY_REGISTRY_ACCESS
+                CraftRegistry.getMinecraftRegistry()
             );
         }
         return component;
