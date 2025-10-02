@@ -24,8 +24,8 @@ final class NmsProvider {
 
         boolean next = false;
         for (int m = minor; m >= 0; m--) {
-            for (int i = next ? MAXIMUM_PATCH : patch; i >= 0; i--) {
-                final Nms found = NmsProvider.find(major, m, i);
+            for (int p = next ? MAXIMUM_PATCH : patch; p >= 0; p--) {
+                final Nms found = NmsProvider.find(major, m, p);
                 if (found != null) {
                     NmsProvider.nms = found;
                     return;
