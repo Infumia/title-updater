@@ -22,14 +22,16 @@ final class NmsProvider {
         final int minor = Version.minor();
         final int patch = Version.patch();
 
+        boolean next = false;
         for (int m = minor; m >= 0; m--) {
-            for (int i = patch; i >= 0; i--) {
+            for (int i = next ? MAXIMUM_PATCH : patch; i >= 0; i--) {
                 final Nms found = NmsProvider.find(major, m, i);
                 if (found != null) {
                     NmsProvider.nms = found;
                     return;
                 }
             }
+            next = true;
         }
 
         throw new IllegalStateException(
